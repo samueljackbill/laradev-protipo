@@ -13,10 +13,10 @@
     <textarea id="description" name="description" rows="10" cols="50"></textarea><br><br>
 
     <label for="rental_price">Valor de Locação:</label><br>
-    <input type="number" id="rental_price" name="rental_price" step="0.01" required><br><br>
+    <input type="number" id="rental_price" name="rental_price" step="0.01"><br><br>
 
     <label for="sale_price">Valor de Compra:</label><br>
-    <input type="number" id="sale_price" name="sale_price" step="0.01" required><br><br>
+    <input type="number" id="sale_price" name="sale_price" step="0.01"><br><br>
 
     <button type="submit">Cadastrar Imóvel</button>
 </form>

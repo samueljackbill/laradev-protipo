@@ -13,13 +13,17 @@ Route::get('/imoveis', [PropertyController::class, 'index']);
 
 ## CADASTRAR
 /* Rota para criar novos registros */
-Route::get('/imoveis/novo', [PropertyController::class, 'create']);
+Route::get('/imoveis/cadastrar_novo_imovel', [PropertyController::class, 'create']);
 /* Rota para armazenar novos registros (chamada dentro do form de cadastro) */
 Route::post('/imoveis/cadastrar', [PropertyController::class, 'store']);
 
 ## VISUALIZAR
-Route::get('/imoveis/{id}', [PropertyController::class, 'show']);
+Route::get('/imoveis/visualizar_imovel/{name}', [PropertyController::class, 'show']);
 
 ## EDITAR
+/* Rota para editar registros */
+Route::get('/imoveis/editar_imovel/{name}', [PropertyController::class, 'edit']);
+/* Rota para armazenar edição dos registros (chamada dentro do form de edição) */
+Route::put('/imoveis/atualizar_imovel/{name}', action: [PropertyController::class, 'update']);
 
 ## EXCLUIR

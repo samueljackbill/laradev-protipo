@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PropertyController extends Controller
 {
@@ -14,9 +15,9 @@ class PropertyController extends Controller
         return view('property/index')->with('properties', $properties);
     }
 
-    public function show($id)
+    public function show($name)
     {
-        $property = DB::select("SELECT * FROM properties WHERE id = ?", [$id]);
+        $property = DB::select("SELECT * FROM properties WHERE name = ?", [$name]);
 
         // dd($property);
 
@@ -34,28 +35,55 @@ class PropertyController extends Controller
 
     public function store(Request $request)
     {
-
-        // echo "Título: " . $request->title;
-        // echo "<br>";
-        // echo "Descrição: " . $request->description;
-        // echo "<br>";
-        // echo "Valor de Locação: " . $request->rental_price;
-        // echo "<br>";
-        // echo "Valor de Compra: " . $request->sale_price;
-        // echo "<br>";
-        // echo "<br>";
-
         // dd($request);
+
+        $propertySlug = $this->setName($request->title);
 
         $property = [
             $request->title,
+            $propertySlug,
             $request->description,
             $request->rental_price,
             $request->sale_price
         ];
 
-        DB::insert("INSERT INTO properties (title, description, rental_price, sale_price) VALUES (?, ?, ?, ?)", $property);
+        DB::insert("INSERT INTO properties (title, name, description, rental_price, sale_price) VALUES (?, ?, ?, ?, ?)", $property);
 
         return redirect()->action([PropertyController::class, 'index']);
+    }
+    public function edit($name)
+    {
+        $property = DB::select("SELECT * FROM properties WHERE name = ?", [$name]);
+
+        // dd($property);
+
+        if(!empty($property)){
+            return view('property/edit')->with('property', $property);
+        } else {
+            return redirect()->action([PropertyController::class, 'index']);
+        }
+    }
+    public function update($name)
+    {
+        dd($name);
+    }
+    private function setName($title)
+    {
+        $propertySlug = Str::slug($title);
+
+        $properties = DB::select("SELECT * FROM properties");
+
+        $t = 0; // Variável temporária
+        foreach($properties as $property){
+            if(Str::slug($property->title) === $propertySlug){
+                $t++;
+            }
+        }
+
+        if($t > 0){
+            $propertySlug = $propertySlug . '-' . $t;
+        }
+
+        return $propertySlug;
     }
 }
