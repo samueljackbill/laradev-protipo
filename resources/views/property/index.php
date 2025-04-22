@@ -12,19 +12,25 @@ if(!empty($properties)) {
 
     echo "
         <tr>
-            <td style='border:1px solid black; font-size:18; font-weight:bold'>Título</td>
-            <td style='border:1px solid black; font-size:18; font-weight:bold'>Valor de Locação</td>
-            <td style='border:1px solid black; font-size:18; font-weight:bold'>Valor de Compra</td>
+            <td style='border:1px solid black; font-size:18; font-weight:bold; text-align: center'>Título</td>
+            <td style='border:1px solid black; font-size:18; font-weight:bold; text-align: center'>Valor de Locação</td>
+            <td style='border:1px solid black; font-size:18; font-weight:bold; text-align: center'>Valor de Compra</td>
+            <td style='border:1px solid black; font-size:18; font-weight:bold; text-align: center'>Ações</td>
         </tr>
         ";
 
     foreach($properties as $property){
+
+        $linkVisualizar = "./imoveis/" . $property->id;
+        $linkEditar = "./imoveis/" . $property->id;
+        $linkExcluir = "./imoveis/" . $property->id;
 
         echo "
             <tr>
                 <td style='border:1px solid black; font-size:18; font-weight:bold'>{$property->title}</td>
                 <td style='border:1px solid black; font-size:18; font-weight:bold'>R$ " . number_format($property->rental_price, 2, ',', '.') . "</td>
                 <td style='border:1px solid black; font-size:18; font-weight:bold'>R$ " . number_format($property->sale_price, 2, ',', '.') . "</td>
+                <td style='border:1px solid black; font-size:18; font-weight:bold'; text-align: center'><a href='$linkVisualizar'>Visualiar</a> | <a href='$linkEditar'>Editar</a> | <a href='$linkExcluir'>Excluir</a></td>
             </tr>
         ";
     }

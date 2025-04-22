@@ -18,6 +18,7 @@ Route::get('/imoveis/novo', [PropertyController::class, 'create']);
 Route::post('/imoveis/cadastrar', [PropertyController::class, 'store']);
 
 ## VISUALIZAR
+Route::get('/imoveis/{id}', [PropertyController::class, 'show']);
 
 ## EDITAR
 
