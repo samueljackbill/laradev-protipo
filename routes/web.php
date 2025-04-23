@@ -27,3 +27,4 @@ Route::get('/imoveis/editar_imovel/{name}', [PropertyController::class, 'edit'])
 Route::put('/imoveis/atualizar_imovel/{name}', action: [PropertyController::class, 'update']);
 
 ## EXCLUIR
+Route::get('/imoveis/remover_imovel/{name}', [PropertyController::class, 'destroy']);

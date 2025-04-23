@@ -4,9 +4,10 @@
 
 <?php  $property = $property[0]; ?>
 
-<form action="<?= url('/imoveis/update'); ?>" method="put">
+<form action="<?= url('/imoveis/atualizar_imovel', ['id' => $property->id]); ?>" method="post">
 
     <?= csrf_field(); ?>
+    <?= method_field('PUT'); ?>
 
     <label for="title">Título do Imóvel:</label><br>
     <input type="text" id="title" name="title" value="<?= $property->title; ?>" required><br><br>
@@ -20,5 +21,5 @@
     <label for="sale_price">Valor de Compra:</label><br>
     <input type="number" id="sale_price" name="sale_price" step="0.01" value="<?= $property->sale_price; ?>"><br><br>
 
-    <button type="submit">Cadastrar Imóvel</button>
+    <button type="submit">Atualizar Imóvel</button>
 </form>
